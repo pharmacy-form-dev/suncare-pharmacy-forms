@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transfer a Prescription | SunCare Pharmacy</title>
+  <meta name="description"
+    content="Transfer your prescriptions to SunCare Pharmacy in Sarnia online.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="favicon-suncare.png">
+  <style>
+    :root {
+      --brand: #0f5481;
+      --brand-dark: #062234;
+      --accent: #d9700f;
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #1b2430;
+      --muted: #5b6675;
+      --border: #d9dee6;
+      --error: #b42318;
+      --success-bg: #ecf7f0;
+      --success: #1e7a45;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bar {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--brand);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .brand img {
+      height: auto;
+      max-height: 40px;
+      width: auto;
+      max-width: min(260px, 55vw);
+      display: block;
+    }
+
+    .back {
+      color: var(--brand);
+      font-size: 14px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    h1 {
+      font-size: 26px;
+      line-height: 1.25;
+      margin: 0 0 8px;
+      color: var(--brand-dark);
+    }
+
+    .lede {
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin: 0 0 6px;
+      color: var(--brand-dark);
+    }
+
+    .card .intro {
+      color: var(--muted);
+      margin: 0 0 20px;
+      font-size: 15px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label,
+    legend {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .req {
+      color: var(--accent);
+    }
+
+    .hint {
+      display: block;
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 2px solid var(--brand);
+      outline-offset: 0;
+      border-color: var(--brand);
+    }
+
+    .invalid input,
+    .invalid textarea {
+      border-color: var(--error);
+    }
+
+    .err {
+      color: var(--error);
+      font-size: 13px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .invalid .err {
+      display: block;
+    }
+
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0;
+    }
+
+    .choice {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-weight: 400;
+    }
+
+    .choice input {
+      margin-top: 4px;
+      accent-color: var(--brand);
+    }
+
+    .consent {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .consent input {
+      margin-top: 3px;
+      accent-color: var(--brand);
+      width: 18px;
+      height: 18px;
+      flex: none;
+    }
+
+    .hp {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    button.submit {
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      background: var(--brand);
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      padding: 14px;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    button.submit:hover {
+      background: var(--brand-dark);
+    }
+
+    button.submit:disabled {
+      opacity: .7;
+      cursor: wait;
+    }
+
+    .alert {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      font-size: 15px;
+      display: none;
+    }
+
+    .alert.show {
+      display: block;
+    }
+
+    .alert.error {
+      background: #fdecec;
+      color: var(--error);
+    }
+
+    .done {
+      text-align: center;
+      padding: 16px 4px;
+    }
+
+    .done .check {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--success-bg);
+      color: var(--success);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .done h2 {
+      margin-bottom: 8px;
+    }
+
+    .done p {
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+
+    .link-btn {
+      background: none;
+      border: 0;
+      color: var(--brand);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .help {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .help a {
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 0 16px 32px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="bar">
+      <a class="brand" id="brandLink" href="https://www.suncarepharmacy.ca">
+        <img src="logo-suncare.png" alt="SunCare Pharmacy"
+          onerror="this.replaceWith(document.createTextNode('SunCare Pharmacy'))">
+      </a>
+      <a class="back" id="backLink" href="https://www.suncarepharmacy.ca">&larr; Back to website</a>
+    </div>
+  </header>
+
+  <main>
+    <h1>Transfer your prescriptions</h1>
+    <p class="lede">Moving to SunCare Pharmacy? Tell us where your prescriptions are now and we'll take care of the rest.</p>
+
+    <!-- Transfer -->
+    <section class="card" id="panel-transfer">
+      <form data-form="transfer" novalidate>
+        <h2>Transfer request</h2>
+        <p class="intro">Complete the form below and we'll contact your current pharmacy to arrange the transfer.</p>
+
+        <div class="field">
+          <label for="t-name">Name <span class="req">*</span></label>
+          <input type="text" id="t-name" name="name" autocomplete="name" maxlength="120" required>
+          <div class="err">Please enter your name.</div>
+        </div>
+
+        <div class="field">
+          <label for="t-dob">Date of birth <span class="req">*</span></label>
+          <input type="date" id="t-dob" name="dob" autocomplete="bday" min="1900-01-01" required>
+          <div class="err">Please enter a valid date of birth.</div>
+        </div>
+
+        <div class="field">
+          <label for="t-pharm">Current pharmacy <span class="req">*</span>
+            <span class="hint">Name, location and phone number if you have it.</span></label>
+          <textarea id="t-pharm" name="currentPharmacy" maxlength="500" required></textarea>
+          <div class="err">Please tell us which pharmacy you use now.</div>
+        </div>
+
+        <div class="field">
+          <label for="t-contact">Your contact information <span class="req">*</span>
+            <span class="hint">Phone number and/or email so we can reach you.</span></label>
+          <textarea id="t-contact" name="contact" maxlength="500" required></textarea>
+          <div class="err">Please enter a phone number or email.</div>
+        </div>
+
+        <div class="field" data-group="scope">
+          <fieldset>
+            <legend>What would you like to transfer? <span class="req">*</span></legend>
+            <label class="choice"><input type="radio" name="scopeType" value="full"> <span>Full file (all my
+                prescriptions)</span></label>
+            <label class="choice"><input type="radio" name="scopeType" value="specific"> <span>Specific prescriptions
+                only</span></label>
+          </fieldset>
+          <div class="err">Please choose one option.</div>
+        </div>
+
+        <div class="field" data-specific hidden>
+          <label for="t-specific">Which prescriptions? <span class="req">*</span></label>
+          <textarea id="t-specific" name="specific" maxlength="1900"></textarea>
+          <div class="err">Please list the prescriptions you'd like to transfer.</div>
+        </div>
+
+        <div class="hp" aria-hidden="true">
+          <label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <div class="field">
+          <label class="consent"><input type="checkbox" name="consent" required>
+            <span>I agree that SunCare Pharmacy may use this information to process my request.</span></label>
+          <div class="err">Please tick the box to continue.</div>
+        </div>
+
+        <button class="submit" type="submit">Send transfer request</button>
+        <div class="alert error" role="alert"></div>
+      </form>
+
+      <div class="done" hidden>
+        <div class="check" aria-hidden="true">&#10003;</div>
+        <h2>Request received</h2>
+        <p>Thank you. We'll contact your current pharmacy to arrange the transfer and reach out if we need anything
+          else.</p>
+        <button class="link-btn" type="button" data-reset>Submit another request</button>
+      </div>
+    </section>
+
+    <p class="help">Questions or need it urgently? Call us at <a id="phoneLink" href="tel:+12267767555">226-776-7555</a>
+    </p>
+  </main>
+
+  <footer>
+    SunCare Pharmacy &middot; 1403 Michigan Ave, Unit 2, Sarnia, ON N7S 0B1<br>
+    Your information is sent directly to SunCare Pharmacy and used only to process your request.
+  </footer>
+
+  <script>
+    const CONFIG = {
+      endpoint: 'https://script.google.com/macros/s/AKfycbwiUdxoLlwm1RSbiN4Ch1aD3MF8OBbUAGS7tOJc6AlcyunQJ5HC3b1TUyTPI7AAlBqa/exec',
+      pharmacyId: 'suncare',
+      phone: '226-776-7555',
+      timeoutMs: 20000
+    };
+
+    const loadedAt = Date.now();
+    const dob = document.getElementById('t-dob');
+    dob.max = new Date().toISOString().slice(0, 10);
+
+    const specificWrap = document.querySelector('[data-specific]');
+    document.querySelectorAll('input[name="scopeType"]').forEach(r => {
+      r.addEventListener('change', () => {
+        specificWrap.hidden = r.value !== 'specific' || !r.checked;
+        document.querySelector('[data-group="scope"]').classList.remove('invalid');
+      });
+    });
+
+    document.querySelectorAll('input, textarea').forEach(el => {
+      el.addEventListener('input', () => el.closest('.field') && el.closest('.field').classList.remove('invalid'));
+    });
+
+    function mark(el, bad) {
+      const f = el.closest('.field');
+      if (f) f.classList.toggle('invalid', bad);
+      return bad;
+    }
+
+    function validDob(v) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return false;
+      const d = new Date(v + 'T00:00:00');
+      return !isNaN(d) && d.getFullYear() >= 1900 && d <= new Date();
+    }
+
+    function collect(form) {
+      const type = form.dataset.form;
+      const q = n => form.querySelector('[name="' + n + '"]');
+      let firstBad = null;
+      const check = (el, bad) => { if (mark(el, bad) && !firstBad) firstBad = el; };
+
+      const fields = {};
+      {
+        fields.name = q('name').value.trim();
+        fields.dob = q('dob').value;
+        fields.currentPharmacy = q('currentPharmacy').value.trim();
+        fields.contact = q('contact').value.trim();
+        check(q('name'), !fields.name);
+        check(q('dob'), !validDob(fields.dob));
+        check(q('currentPharmacy'), !fields.currentPharmacy);
+        check(q('contact'), !fields.contact);
+
+        const picked = form.querySelector('input[name="scopeType"]:checked');
+        const scopeGroup = form.querySelector('[data-group="scope"]');
+        scopeGroup.classList.toggle('invalid', !picked);
+        if (!picked && !firstBad) firstBad = form.querySelector('input[name="scopeType"]');
+        if (picked && picked.value === 'full') {
+          fields.scope = 'Full file';
+        } else if (picked) {
+          const s = q('specific').value.trim();
+          check(q('specific'), !s);
+          fields.scope = 'Specific prescriptions: ' + s;
+        }
+      }
+
+      const consent = q('consent');
+      check(consent, !consent.checked);
+
+      if (firstBad) { firstBad.focus(); return null; }
+      return {
+        pharmacy: CONFIG.pharmacyId,
+        form: type,
+        fields: fields,
+        consent: true,
+        hp: q('website').value,
+        t: loadedAt
+      };
+    }
+
+    function showError(form, msg) {
+      const box = form.querySelector('.alert');
+      box.innerHTML = msg;
+      box.classList.add('show');
+    }
+
+    document.querySelectorAll('form[data-form]').forEach(form => {
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const alertBox = form.querySelector('.alert');
+        alertBox.classList.remove('show');
+
+        const payload = collect(form);
+        if (!payload) return;
+
+        const btn = form.querySelector('.submit');
+        const label = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        const phoneHtml = '<a href="tel:+1' + CONFIG.phone.replace(/\D/g, '') + '">' + CONFIG.phone + '</a>';
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), CONFIG.timeoutMs);
+
+        try {
+          const res = await fetch(CONFIG.endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload),
+            signal: ctrl.signal
+          });
+          const data = await res.json();
+          if (data.ok) {
+            form.hidden = true;
+            const done = form.parentElement.querySelector('.done');
+            done.hidden = false;
+            const heading = done.querySelector('h2');
+            heading.setAttribute('tabindex', '-1');
+            heading.focus();
+          } else if (data.error === 'limit') {
+            showError(form, "We can't accept more online requests today. Please call us at " + phoneHtml + '.');
+          } else if (data.error === 'invalid') {
+            showError(form, 'Some details look incomplete. Please check the form and try again, or call us at ' + phoneHtml + '.');
+          } else {
+            showError(form, "Sorry, your request didn't go through. Please try again in a moment, or call us at " + phoneHtml + '.');
+          }
+        } catch (err) {
+          showError(form, "Sorry, your request didn't go through. Please check your connection and try again, or call us at " + phoneHtml + '.');
+        } finally {
+          clearTimeout(timer);
+          btn.disabled = false;
+          btn.textContent = label;
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-reset]').forEach(b => {
+      b.addEventListener('click', () => {
+        const panel = b.closest('.card');
+        const form = panel.querySelector('form');
+        form.reset();
+        specificWrap.hidden = true;
+        form.hidden = false;
+        panel.querySelector('.done').hidden = true;
+      });
+    });
+  </script>
+</body>
+
+</html>
